@@ -65,7 +65,7 @@
 		private var mask_rec : Rectangle = new Rectangle();
 		
 		/*Tu*/
-		private var thumbSlideSpeed :int = 2;
+		private var thumbSlideSpeed :int = 1.5;
 		private var countInterval : uint = 0;
 		
 		//XML SETTINGS

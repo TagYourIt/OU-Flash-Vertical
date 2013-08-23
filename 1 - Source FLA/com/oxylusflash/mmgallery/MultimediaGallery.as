@@ -369,6 +369,8 @@
 						/*Tu*/
 						//Stop thumb from sliding up
 						StopSlideThumbUp(pThumbnail);
+						//itunes U
+						trace("itunes link is " + pThumbnail.ituneLink);
 						
 					}
 				break;
@@ -751,6 +753,10 @@
 					_dataXML.content.item[i].type, 
 					_dataXML.content.item[i].detailView, 
 					i); 
+					
+					/*Tu*/
+					//Set itune link to each thumbnail
+					thumbnail.ituneLink = _dataXML.content.item[i].detailView.itunesu;
 					
 					/*thumbnail.thumbRotation = 
 					thumbnail.rotation = (2 * Math.random() - 1) * _thumbCell_settings.thumbnail.maxRotation;*/

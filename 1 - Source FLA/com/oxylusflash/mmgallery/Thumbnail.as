@@ -44,7 +44,7 @@ package com.oxylusflash.mmgallery
 		
 		/*Tu*/
 		private var _randomY : int = 0;
-		
+		private var _ituneLink : String ;
 		
 		private var _thumbnailSignal : Signal;
 		private var _settings : Object;
@@ -480,11 +480,18 @@ package com.oxylusflash.mmgallery
 		{
 			_initW = value;
 		}
-		
+		/*Tu*/
 		internal function get randomYSpeed():int { return _randomY; }
 		internal function set randomYSpeed(value:int):void 
 		{
 			_randomY = value;
+		}
+		
+		/*Tu*/
+		internal function get ituneLink():String { return _ituneLink; }
+		internal function set ituneLink(value:String):void 
+		{
+			_ituneLink = value;
 		}
 		
 		internal function get detailH():int { return _detailH; }

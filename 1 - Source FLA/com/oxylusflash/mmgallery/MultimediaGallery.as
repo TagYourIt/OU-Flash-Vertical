@@ -13,6 +13,7 @@
 	import com.oxylusflash.multimediaviewer.LclVidGallery;
 	import com.oxylusflash.multimediaviewer.SwfGallery;
 	import com.oxylusflash.multimediaviewer.YtGallery;
+	import com.oxylusflash.multimediaviewer.CloseBtnOU;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -67,6 +68,7 @@
 		/*Tu*/
 		private var thumbSlideSpeed :int = 1.5;
 		private var countInterval : uint = 0;
+		public var closeBtnOU : CloseBtnOU;
 		
 		//XML SETTINGS
 		private var _layout_settings : Object;
@@ -620,6 +622,18 @@
 			this.x = int(_compLayout.x);
 			trace("compLayout " + _compLayout.width);
 			this.y = int(_compLayout.y);
+			
+			//TU CLOSE BUTTON
+			closeBtnOU = new CloseBtnOU();
+			
+			
+			
+			closeBtnOU.mouseEnabled = true;
+			closeBtnOU.btnSignal.add(SignalHandler);
+			
+			this.addChild(closeBtnOU);
+			
+			
 		}
 		//} endregion
 		
@@ -743,7 +757,7 @@
 					delayTime++;
 					
 					thumbnail.name = "thumbnail";
-					thumbnail.thumbnailSignal.add(SignalHandler);
+					thumbnail.thumbnailSignal.add(SignalHandler);//Signal event addlistener
 					thumbnail.settings = _thumbCell_settings.thumbnail;
 					
 					thumbnail.yt_settings = _youTube_settings;
@@ -878,9 +892,10 @@
 		//Move thumbnails up
 		private function SlideThumbUp(e:Event):void
 		{
-			trace(e.target.y);
+				/*Tu*/
+			//trace(e.target.y);
 			var tu = e.target as Thumbnails;
-			trace(tu.randomYSpeed);
+			//trace(tu.randomYSpeed);
 			var thisHeight = e.target.height;
 			e.target.y = e.target.y - tu.randomYSpeed;
 			if(e.target.y < (0 - thisHeight)){
@@ -920,6 +935,8 @@
 		//{ region DO ROTATE ANIMATION
 		private final function DoRotateAnimation(pThumbnail : Thumbnails):void
 		{
+			trace("helloz");
+			
 			if (old_thumbnail && old_thumbnail != pThumbnail) 
 			{
 				RollBackAnim(old_thumbnail);
@@ -932,11 +949,14 @@
 				pThumbnail.rotateMe = 360;
 				var cmpW : Number = bg_mc.width;
 				var cmpH : Number = bg_mc.height;
-				
+				trace("bg_mc " + bg_mc.width);
 				thumbnailResize = Resize.compute(
 				new Rectangle(0, 0, pThumbnail.detailW, pThumbnail.detailH), 
 				new Rectangle(0, 0, int(cmpW - 2 * _detailView_settings.margin), int(cmpH - 2 * _detailView_settings.margin)),
 				ResizeType.FIT);
+				
+				trace(thumbnailResize.width);//808
+				
 				
 				Tweener.addTween(pThumbnail, 
 				{
@@ -957,6 +977,7 @@
 					onComplete: function ():void 
 					{
 						pThumbnail.x = int(cmpW * 0.5);
+						
 						pThumbnail.y = int(cmpH * 0.5);
 						pThumbnail.rotation = 0;
 						
@@ -992,18 +1013,22 @@
 											repeat : _detailView_settings.video.repeat,
 											initVolume : _detailView_settings.video.initVolume
 										};
-										
-										ytGallery.cW = 
+										/*Tu*/
+										//Set the width and height of youtube player
+										ytGallery.cW =
 										ytGallery.cWidth = Math.round(pThumbnail.bg_mc.width - 2 * pThumbnail.settings.border.size);
 										
-										ytGallery.cH = 
+										ytGallery.cH =
 										ytGallery.cHeight = Math.round(pThumbnail.bg_mc.height - 2 * pThumbnail.settings.border.size);
 										
 										ytGallery.x = Math.round(pThumbnail.bg_mc.width * 0.5 - ytGallery.cWidth - pThumbnail.settings.border.size);
 										ytGallery.y = Math.round(pThumbnail.bg_mc.height * 0.5 - ytGallery.cHeight - pThumbnail.settings.border.size);
 										
 										ytGallery.reset();
+										
 										ytGallery.btn_mc.btnSignal.add(SignalHandler);
+										/*Tu - adding signal to the close button for OU video*/
+										//ytGallery.closeBtnOU.btnSignal.add(SignalHandler);
 										ytGallery.mcFullscreen.fullScreenSignal.add(FullScreenSignalHandler);
 										
 										if (_detailView_settings.useUpperCase) 
@@ -1024,8 +1049,21 @@
 											ytGallery.StartMeUp(_youTube_settings, _dataXML.settings.youtube.policyFiles, _dataXML.content.item[pThumbnail.xmlInd].detailView, ""); 
 										}
 										
-										pThumbnail.addChild(ytGallery);
-										ytGallery.ShowInterface();
+										pThumbnail.addChild(ytGallery);//Need
+										ytGallery.ShowInterface();//Need
+										//Tu
+										//CLOSE BUTTON POSITION
+										closeBtnOU.visible = true;
+										closeBtnOU.alpha = 1;
+										
+										//trace("position of yt " + ytGallery.x + " " + ytGallery.y);
+										//trace(pThumbnail.x + " " + pThumbnail.y);
+										var realX = pThumbnail.x + ytGallery.x;
+										var realY = pThumbnail.y + ytGallery.y;
+										//trace("actually pos " + realX + " " + realY);
+										closeBtnOU.x = realX + thumbnailResize.width - (closeBtnOU.width + 4);//4 is the border width
+										closeBtnOU.y = realY - (30);//4 is the border width
+										
 									break;
 									//} endregion
 									
@@ -1255,6 +1293,7 @@
 								
 								pOld_thumbnail.galleryHolder = ytOld_Gallery;
 								
+								
 								if (stage.displayState == StageDisplayState.FULL_SCREEN) 
 								{
 									stage.displayState = StageDisplayState.NORMAL;
@@ -1265,6 +1304,11 @@
 								ytOld_Gallery.mcFullscreen.fullScreenSignal.remove(FullScreenSignalHandler);
 								ytOld_Gallery.Destroy();
 								ytOld_Gallery = null;
+								
+								//CLOSE BUTTON
+								closeBtnOU.visible = false;
+								
+								closeBtnOU.alpha = 0;
 							}
 						break;
 						//} endregion
@@ -1405,7 +1449,7 @@
 								var yt_Gallery : YtGallery = YtGallery(paramThumb.getChildByName("ytGallery"));
 								yt_Gallery.cW = 
 								yt_Gallery.cWidth = Math.round(paramThumb.bg_mc.width - 2 * paramThumb.settings.border.size);
-								
+									
 								yt_Gallery.cH = 
 								yt_Gallery.cHeight = Math.round(paramThumb.bg_mc.height - 2 * paramThumb.settings.border.size);
 								

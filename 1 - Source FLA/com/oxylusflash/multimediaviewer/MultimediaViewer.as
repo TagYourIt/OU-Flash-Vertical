@@ -1,9 +1,6 @@
-﻿package com.oxylusflash.multimediaviewer 
+package com.oxylusflash.multimediaviewer 
 {
 	//{ region IMPORT CLASSES
-	import com.oxylusflash.framework.util.StringUtil;
-	import com.oxylusflash.framework.util.XMLUtils;
-	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -15,8 +12,9 @@
 	import flash.text.TextFieldAutoSize;
 	
 	import caurina.transitions.Tweener;
-	
 	import org.osflash.signals.Signal;
+	import com.oxylusflash.framework.util.XMLUtils;
+	import com.oxylusflash.framework.util.StringUtil;
 	//} endregion
 	/**
 	 * ...
@@ -30,12 +28,10 @@
 		public var mcPlayBtn : MovieClip;
 		public var mcVideoPlayerBg : MovieClip;
 		public var mcVideoPlayerBgN : MovieClip;
-		public var mcVh : MovieClip;//youtube video container
+		public var mcVh : MovieClip;
 		public var mcVideoColorBg : MovieClip;
 		public var mcError : MovieClip;
-		public var btn_mc : CloseBtn;//close button
-		/*Tu*/
-		public var closeBtnOU : CloseBtnOU;
+		public var btn_mc : CloseBtn;
 		
 		//{ region GUI CONSTANT
 		internal const FULLSCREEN_DELAY : int = 3000;
@@ -194,7 +190,6 @@
 					_cHeight = stage.stageHeight;
 					_cWidth = stage.stageWidth;
 					mcFullscreen.setBtnType();
-					/*Tu*/
 					//resize();
 				break;
 				
@@ -253,8 +248,8 @@
 			}
 			
 			rollOut = false;
-			//Tweener.addTween(mcController, { y: int(_cHeight - mcController.mcBg.height), time: .3, transition: "easeOutQuad" } );
-			//Tweener.addTween(mcHeader, { y: 0, time: .3, transition: "easeOutQuad" } );
+			Tweener.addTween(mcController, { y: int(_cHeight - mcController.mcBg.height), time: .3, transition: "easeOutQuad" } );
+			Tweener.addTween(mcHeader, { y: 0, time: .3, transition: "easeOutQuad" } );
 		}
 		//} endregion
 		
@@ -269,8 +264,8 @@
 				}
 				
 				rollOut = true;
-				//Tweener.addTween(mcController, { y: int(_cHeight), time: .3, transition: "easeOutQuad" } );
-				//Tweener.addTween(mcHeader, { y: int(- mcHeader.mcBg.height), time: .3, transition: "easeOutQuad" } );
+				Tweener.addTween(mcController, { y: int(_cHeight), time: .3, transition: "easeOutQuad" } );
+				Tweener.addTween(mcHeader, { y: int(- mcHeader.mcBg.height), time: .3, transition: "easeOutQuad" } );
 			}
 		}
 		//} endregion
@@ -354,7 +349,6 @@
 		internal function closeBtn_MouseDownHandler(e:MouseEvent):void 
 		{
 			btn_mc.drag = true;
-			closeBtnOU.drag = true;
 			signalHandler("DRAG TRUE", null);
 			stage.addEventListener(MouseEvent.MOUSE_UP, closeBtnStage_mouseUpHandler, false, 0, true);
 		}
@@ -364,7 +358,6 @@
 		private final function closeBtnStage_mouseUpHandler(e:MouseEvent):void 
 		{
 			btn_mc.drag = false;
-			closeBtnOU.drag = false;
 			signalHandler("DRAG FALSE", null);
 			
 			if (e.target != btn_mc)
@@ -376,19 +369,6 @@
 			{
 				btn_mc.rollOutHandler();
 			}
-			
-			if (e.target != closeBtnOU)
-			{
-				signalHandler("MAIN ROLL OUT", e);
-			}
-			
-			if (e.target != closeBtnOU) 
-			{
-				//closeBtnOU.rollOutHandler();
-			}
-			
-			trace("close button pressed");
-			
 			
 			stage.removeEventListener(MouseEvent.MOUSE_UP, closeBtnStage_mouseUpHandler);
 		}
@@ -478,7 +458,6 @@
 			mcProgressBar.startMe();
 			mcController.addChild(mcProgressBar);
 			
-			
 			//HEADER
 			mcHeader.y = int( -mcHeader.mcBg.height);
 			
@@ -541,21 +520,6 @@
 			btn_mc.alpha = 1;
 			btn_mc.mouseEnabled = true;
 			
-			//CLOSE BTN OU
-			//closeBtnOU = new CloseBtnOU();
-			//closeBtnOU.addEventListener(MouseEvent.MOUSE_DOWN, closeBtn_MouseDownHandler, false, 0, true);
-			
-			//closeBtnOU.visible = true;
-			//closeBtnOU.alpha = 1;
-			//closeBtnOU.mouseEnabled = true;
-			//closeBtnOU.y = -20;
-			//closeBtnOU.x = -20;
-			//closeBtnOU.width = 300;
-			//closeBtnOU.hitArea_mc.alpha = 1;
-			//closeBtnOU.hitArea_mc.width = int(btn_mc.sign_mc.x + btn_mc.sign_mc.width + CLOSE_TXT_LEFT + 2);
-			//closeBtnOU.lbl_mc.txt.text = "Hello";
-			//this.addChild(closeBtnOU);
-			
 			//ERROR
 			mcError.visible = false;
 			mcError.alpha = 0;
@@ -588,7 +552,6 @@
 			mcPlayBtn.addEventListener(MouseEvent.ROLL_OUT, playBtn_rollOutHandler, false, 0, true);
 			mcPlayBtn.addEventListener(MouseEvent.CLICK, playBtn_clickHandler, false, 0, true);
 			mcPlayBtn.addEventListener(MouseEvent.MOUSE_DOWN, playBtn_mouseDownHandler, false, 0, true);
-			
 			
 			//SHOW COMPONENTS AND HIDE THEM
 			mcTogglePp.visible = true;
@@ -832,7 +795,6 @@
 			} } );*/
 			
 			mcVh.visible = true;
-			
 			Tweener.addTween(mcVh, { alpha: 1, time: _animation.bringToFrontTime, transition: _animation.bringToFrontType });
 		}
 		//} endregion
@@ -866,7 +828,7 @@
 		{
 			title_mask.height = int(mcHeader.mcNpTxt.txt.textHeight);
 			title_mask.width = int(btn_mc.x - mcHeader.mcNpTxt.x);
-			//mcHeader.mcNpTxt.scrollRect = title_mask;
+			mcHeader.mcNpTxt.scrollRect = title_mask;
 		}
 		//} endregion
 		
@@ -877,11 +839,6 @@
 			{
 				btn_mc.removeEventListener(MouseEvent.MOUSE_DOWN, closeBtn_MouseDownHandler);
 			}
-			/*Tu*/
-			/*if (closeBtnOU.hasEventListener(MouseEvent.MOUSE_DOWN)) 
-			{
-				closeBtnOU.removeEventListener(MouseEvent.MOUSE_DOWN, closeBtn_MouseDownHandler);
-			}*/
 			
 			if (stage && stage.hasEventListener(MouseEvent.MOUSE_UP)) 
 			{

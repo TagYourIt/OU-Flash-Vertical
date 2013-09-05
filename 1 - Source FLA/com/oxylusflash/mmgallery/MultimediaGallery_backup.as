@@ -9,7 +9,6 @@
 	import com.oxylusflash.framework.util.XMLUtils;
 	import com.oxylusflash.mmgallery.Thumbnails;
 	import com.oxylusflash.multimediaviewer.AudioGallery;
-	import com.oxylusflash.multimediaviewer.CloseBtnOU;
 	import com.oxylusflash.multimediaviewer.ImgGallery;
 	import com.oxylusflash.multimediaviewer.LclVidGallery;
 	import com.oxylusflash.multimediaviewer.SwfGallery;
@@ -30,6 +29,7 @@
 	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.utils.*;
 	
 	import caurina.transitions.Tweener;
 	//} endregion
@@ -204,8 +204,6 @@
 			_youTube_settings = XMLUtils.toObject(_dataXML.settings.youtube[0]);
 			
 			xmlLength = _dataXML.content.item.length();
-			/*Tu get total items*/
-			trace("length is "  + xmlLength );
 			
 			try 
 			{
@@ -223,8 +221,6 @@
 		//{ region COMP LAYOUT SIZE CHANGE HANDLER
 		private final function compLayoutSizeChangeHandler(e:LayoutEvent):void
 		{
-			
-			
 			if (!this.visible) 
 			{
 				this.visible = true;
@@ -238,8 +234,6 @@
 				
 				mask_rec.height = 
 				bg_mc.height = int(e.height); 
-				
-				
 				
 				this.scrollRect = mask_rec;
 				
@@ -557,7 +551,6 @@
 			
 			//thumbnail.thumbRotation = (2 * Math.random() - 1) * _thumbCell_settings.thumbnail.maxRotation;
 			thumbnail.thumbRotation = 0;
-			
 			thumbnail.doOutAnim = true;
 			
 			if (!thumbnail.imOver) 
@@ -647,8 +640,7 @@
 		//{ region PAGINATION
 		private final function Pagination():void
 		{
-			/*Tu modified for no pagination*/
-			nrOFthumbsPerP = xmlLength;//int(bg_mc.width / _thumbCell_settings.width) * int(bg_mc.height / _thumbCell_settings.height);
+			nrOFthumbsPerP = int(bg_mc.width / _thumbCell_settings.width) * int(bg_mc.height / _thumbCell_settings.height);
 			
 			if (nrOFthumbsPerP > xmlLength) 
 			{
@@ -732,8 +724,6 @@
 			var lastH : int = 0;
 			
 			var xCounter : int = 0;
-			//var posRect : Rectangle = new Rectangle(0, 0, _thumbCell_settings.width, _thumbCell_settings.height);
-			/*Tu*/
 			var posRect : Rectangle = new Rectangle(0, 0, _thumbCell_settings.width, _thumbCell_settings.height);
 			var delayTime : int = 0;
 			
@@ -788,8 +778,6 @@
 					thumbnail.thumbRotation = 0;
 					
 					thumbnail.cW = bg_mc.width;
-					/*Tu*/
-					//trace("thumbnail setting width " + ls);//is the width from the XML
 					thumbnail.cH = bg_mc.height;
 					
 					thumbnail.x = 
@@ -797,20 +785,11 @@
 					
 					thumbnail.y = 
 					thumbnail.initY = int(posRect.y + Math.random() * posRect.height);
-					//trace("thumbnail width " + thumbnail.width);
-					//thumbnail.width = 132;
-					//thumbnail.height = 86;
-					//thumbnail.scaleX = 2;
-					//thumbnail.scaleY = 1.5;
-					//trace("tu " + thumbnail.scaleX);
-					
-					
 					/*Tu*/
 					thumbnail.randomYSpeed = thumbSlideSpeed;
 					h_mc.addChild(thumbnail);
 					/*Tu*/
 					//thumbnail.addEventListener(Event.ENTER_FRAME,SlideThumbUp);
-					
 				}
 				i++;
 				/*Tu*/
@@ -827,15 +806,6 @@
 			
 		}
 		//} endregion
-		/*Tu*/
-		private function generateRandomThumbSize():Rectangle
-		{
-			//var posRect : Rectangle = new Rectangle(0, 0, _thumbCell_settings.width, _thumbCell_settings.height);
-			var newRect : Rectangle = new Rectangle(0, 0, 100, 100);
-			return newRect;
-		}
-		
-		
 		
 		//{ region LOAD XML
 		private final function loadXML(pXMLpath : String = ""):void
@@ -959,7 +929,6 @@
 			
 			for(var i = 0;i < endXML; i++){
 				h_mc.getChildAt(i).addEventListener(Event.ENTER_FRAME, SlideThumbUp);
-				
 			}
 		}
 		

@@ -268,8 +268,8 @@
 				}
 			}
 			/*TU*/
-			trace("resize width " + bg_mc.width);
-			trace("resize height " + bg_mc.height);
+			//trace("resize width " + bg_mc.width);
+			//trace("resize height " + bg_mc.height);
 			
 		}
 		//} endregion
@@ -805,9 +805,9 @@
 					//thumbnail.scaleY = 1.5;
 					//trace("tu " + thumbnail.scaleX);
 					
-					
 					/*Tu*/
 					thumbnail.randomYSpeed = thumbSlideSpeed;
+					
 					h_mc.addChild(thumbnail);
 					/*Tu*/
 					//thumbnail.addEventListener(Event.ENTER_FRAME,SlideThumbUp);
@@ -816,9 +816,10 @@
 				i++;
 				/*Tu*/
 				//counter for thumb generate
-				trace(i);
-				trace("endXML " + endXML);
-				trace("h_mc children " + h_mc.numChildren);
+				//trace(i);
+				//trace("endXML " + endXML);
+				//trace("h_mc children " + h_mc.numChildren);
+				
 				if(i == endXML){
 					trace("done");
 					//Execute function for SlideUp Governor
@@ -966,6 +967,22 @@
 			//var myInterval:uint = setInterval (SlideAnother, 1000);
 			//clearInterval(myInterval);
 			
+			/* Leon */
+			
+			
+			var high =  thumbnail.initX - 90;
+			var	low = thumbnail.initY + 30;
+			
+			var myRandomNumber:int = Math.floor(Math.random()*(1+high-low))+low;
+			
+			 //randomNumberText.text = (Math.ceil(Math.random()*(high-low))+low).toString();
+			
+			//trace(randomNumberText);
+			
+			trace("myRandomNumber" + myRandomNumber);
+			
+			
+			
 			for(var i = 0;i < endXML; i++){
 				h_mc.getChildAt(i).addEventListener(Event.ENTER_FRAME, SlideThumbUp);
 				
@@ -975,7 +992,7 @@
 		//{ region DO ROTATE ANIMATION
 		private final function DoRotateAnimation(pThumbnail : Thumbnails):void
 		{
-			trace("helloz");
+			trace("region DO ROTATE ANIMATION");
 			
 			if (old_thumbnail && old_thumbnail != pThumbnail) 
 			{
@@ -1369,7 +1386,7 @@
 								
 								if (stage.displayState == StageDisplayState.FULL_SCREEN) 
 								{
-									stage.displayState = StageDisplayState.NORMAL;
+									//stage.displayState = StageDisplayState.NORMAL;
 									lvOld_Gallery.signalHandler("NORMAL");
 								}
 								

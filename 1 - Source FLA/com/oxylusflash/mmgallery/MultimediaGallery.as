@@ -15,6 +15,7 @@
 	import com.oxylusflash.multimediaviewer.SwfGallery;
 	import com.oxylusflash.multimediaviewer.YtGallery;
 	import com.oxylusflash.multimediaviewer.CloseBtnOU;
+	import com.oxylusflash.multimediaviewer.EmailBtnOu;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -922,14 +923,22 @@
 		//Move thumbnails up
 		private function SlideThumbUp(e:Event):void
 		{
-				/*Tu*/
+			var high =  _compLayout.width;
+			var	low = 1;
+			//trace ("high " + high);
+			//trace ("low " + low);
+			var myRandomNumber:int = Math.floor(Math.random()*(1+high-low))+low;
+			
+			trace("myRandomNumber: " + myRandomNumber);
+			/*Tu*/
 			//trace(e.target.y);
 			var tu = e.target as Thumbnails;
 			//trace(tu.randomYSpeed);
 			var thisHeight = e.target.height;
 			e.target.y = e.target.y - tu.randomYSpeed;
 			if(e.target.y < (0 - thisHeight)){
-				e.target.y = 1000;
+				e.target.y = 1300; //height
+				e.target.x = myRandomNumber;
 			}
 		}
 		//end

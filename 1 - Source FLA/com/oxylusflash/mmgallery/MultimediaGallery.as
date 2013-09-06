@@ -15,7 +15,7 @@
 	import com.oxylusflash.multimediaviewer.SwfGallery;
 	import com.oxylusflash.multimediaviewer.YtGallery;
 	import com.oxylusflash.multimediaviewer.CloseBtnOU;
-	import com.oxylusflash.multimediaviewer.EmailBtnOu;
+	import com.oxylusflash.multimediaviewer.EmailBtnOU;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -33,7 +33,7 @@
 	import flash.net.URLRequest;
 	
 	import caurina.transitions.Tweener;
-	import com.oxylusflash.multimediaviewer.EmailBtnOU;
+	//import com.oxylusflash.multimediaviewer.EmailBtnOU;
 
 	//} endregion
 	/**
@@ -271,7 +271,7 @@
 				}
 			}
 			/*TU*/
-			trace("resize width " + bg_mc.width);
+			//trace("resize width " + bg_mc.width);
 			trace("resize height " + bg_mc.height);
 			
 		}
@@ -1348,7 +1348,7 @@
 								if (stage.displayState == StageDisplayState.FULL_SCREEN) 
 								{
 									//stage.displayState = StageDisplayState.NORMAL;
-									ytOld_Gallery.signalHandler("NORMAL");
+									//ytOld_Gallery.signalHandler("NORMAL");
 								}
 								
 								ytOld_Gallery.btn_mc.btnSignal.remove(SignalHandler);
@@ -1380,8 +1380,8 @@
 								
 								if (stage.displayState == StageDisplayState.FULL_SCREEN) 
 								{
-									stage.displayState = StageDisplayState.NORMAL;
-									lvOld_Gallery.signalHandler("NORMAL");
+									//stage.displayState = StageDisplayState.NORMAL;
+									//lvOld_Gallery.signalHandler("NORMAL");
 								}
 								
 								lvOld_Gallery.btn_mc.btnSignal.remove(SignalHandler);

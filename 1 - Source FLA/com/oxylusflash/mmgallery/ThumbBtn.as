@@ -1,4 +1,4 @@
-package com.oxylusflash.mmgallery 
+﻿package com.oxylusflash.mmgallery 
 {
 	//{ region IMPORT CLASSES
 	import caurina.transitions.Tweener;
@@ -47,6 +47,8 @@ package com.oxylusflash.mmgallery
 			this.addEventListener(MouseEvent.ROLL_OVER, rollOverHandler, false, 0, true);
 			this.addEventListener(MouseEvent.ROLL_OUT, rollOutHandler, false, 0, true);
 			this.addEventListener(MouseEvent.CLICK, clickHandler, false, 0, true);
+			
+			
 		}
 		//} endregion
 		
@@ -57,8 +59,9 @@ package com.oxylusflash.mmgallery
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			this.visible = true;
+			this.visible = false;
 			Tweener.addTween(this, { alpha: 1, time: 0.3, transition: "easeoutquad" });
+			
 		}
 		//} endregion
 		

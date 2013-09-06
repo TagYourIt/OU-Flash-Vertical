@@ -14,7 +14,7 @@
 	import com.oxylusflash.multimediaviewer.LclVidGallery;
 	import com.oxylusflash.multimediaviewer.SwfGallery;
 	import com.oxylusflash.multimediaviewer.YtGallery;
-	import com.oxylusflash.multimediaviewer.CloseBtnOU;
+
 	import com.oxylusflash.multimediaviewer.EmailBtnOU;
 	
 	import flash.display.MovieClip;
@@ -930,13 +930,13 @@
 		//Move thumbnails up
 		private function SlideThumbUp(e:Event):void
 		{
-			var high =  _compLayout.width;
+			var high =  _compLayout.width - 100;
 			var	low = 1;
 			//trace ("high " + high);
 			//trace ("low " + low);
 			var myRandomNumber:int = Math.floor(Math.random()*(1+high-low))+low;
 			
-			trace("myRandomNumber: " + myRandomNumber);
+			//trace("myRandomNumber: " + myRandomNumber);
 			/*Tu*/
 			//trace(e.target.y);
 			var tu = e.target as Thumbnails;
@@ -963,7 +963,9 @@
 		private function SlideAnother():void{
 			h_mc.getChildAt(countInterval).addEventListener(Event.ENTER_FRAME, SlideThumbUp);
 			countInterval++;
+			//trace("countInterval" +countInterval);
 		}
+		
 		
 		private function SlideUpGovernor():void{
 			//function to slide the thumbs up version 2
@@ -1002,7 +1004,7 @@
 				new Rectangle(0, 0, int(cmpW - 2 * _detailView_settings.margin), int(cmpH - 2 * _detailView_settings.margin)),
 				ResizeType.FIT);
 				
-				trace(thumbnailResize.width);//808
+				trace("thumbnailResize"+thumbnailResize.width);//808
 				
 				
 				Tweener.addTween(pThumbnail, 
@@ -1114,6 +1116,9 @@
 										//trace("actually pos " + realX + " " + realY);
 										closeBtnOU.x = realX + thumbnailResize.width - (closeBtnOU.width + 4);//4 is the border width
 										closeBtnOU.y = realY - (30);//4 is the border width
+										
+										emailBtnOU.x = realX + thumbnailResize.width - (emailBtnOU.width + 104);
+										emailBtnOU.y = realY - (30);
 										
 									break;
 									//} endregion
@@ -1360,6 +1365,11 @@
 								closeBtnOU.visible = false;
 								
 								closeBtnOU.alpha = 0;
+								
+								
+								emailBtnOU.visible = false;
+								
+								emailBtnOU.alpha = 0;
 							}
 						break;
 						//} endregion

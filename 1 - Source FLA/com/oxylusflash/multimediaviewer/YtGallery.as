@@ -160,7 +160,8 @@ package com.oxylusflash.multimediaviewer
 					
 					
 					mcError.visible = true;
-					mcError.alpha = 1;
+					/*Tu*/
+					mcError.alpha = 0;//Black dot
 				break;
 			}
 		}
@@ -280,14 +281,16 @@ package com.oxylusflash.multimediaviewer
 		override public function reset():void 
 		{
 			super.reset();
-			mcVideoPlayerBg.alpha = 0;
-			mcVideoPlayerBg.visible = true;
+			/*Tu*/
+			mcVideoPlayerBg.alpha = 0;//0
+			mcVideoPlayerBg.visible = true;//this allows for mouse over and display the controlls including the close button
 			
-			mcVideoPlayerBgN.alpha = 0;
-			mcVideoPlayerBgN.visible = false;
+			mcVideoPlayerBgN.alpha = 0;//0
+			mcVideoPlayerBgN.visible = true;
 			
 			mcProgressBar.mcHitArea.width = mcProgressBar.mcTrack.width;
 			mcProgressBar.hitArea = mcProgressBar.mcHitArea;
+			mcProgressBar.y = 0;
 		}
 		//} endregion
 		
@@ -314,7 +317,10 @@ package com.oxylusflash.multimediaviewer
 		{
 			videoPlayer = new YouTubePlayer();
 			mcVh.addChild(videoPlayer);
+			/*Tu*/
+			//videoPlayer.x = -200;
 			
+			//videoPlayer.x = -20;
 			videoPlayer.videoSignal.add(VideoPlayerHandler);
 			videoPlayer.volume = detailView.settings.initVolume;
 			videoPlayer.autoPlay = detailView.settings.autoPlay;

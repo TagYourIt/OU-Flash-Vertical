@@ -59,7 +59,7 @@ package com.oxylusflash.multimediaviewer
 			this.visible = false;
 			this.alpha = 0;
 			
-			_videoSignal = new Signal( String);
+			_videoSignal = new Signal(String);
 		}
 		//} endregion
 		

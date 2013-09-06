@@ -1,4 +1,4 @@
-package com.oxylusflash.mmgallery 
+﻿package com.oxylusflash.mmgallery 
 {
 	//{ region IMPORT CLASSES
 	import com.oxylusflash.framework.util.StringUtils;
@@ -69,6 +69,8 @@ package com.oxylusflash.mmgallery
 		private var pic_bitMapD : BitmapData;
 		private var pic_bitMap : Bitmap;
 		//} endregion
+		
+		
 		
 		//{ region CONSTRUCTOR
 		public function Thumbnail()
@@ -166,6 +168,9 @@ package com.oxylusflash.mmgallery
 			
 			try 
 			{
+				
+		
+				
 				h_mc.addChild(pic_bitMap);
 				
 				initW = 
@@ -292,6 +297,7 @@ package com.oxylusflash.mmgallery
 			{
 				this.y = int(this.y + 0.5 * bg_mc.height);
 			}
+			
 			
 			this.scaleX = 0;
 			this.scaleY = 0;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties analytics="false" mainApplicationPath="main.as" projectUUID="9bde1050-91f6-4bcf-87bc-cfdf8653bd45" version="11">
+<actionScriptProperties analytics="false" mainApplicationPath="main_1_SourceFLA.as" projectUUID="21b6ad82-69d2-4cfd-89ac-774fd4ce96f9" version="11">
   <compiler additionalCompilerArguments="-locale en_US" advancedTelemetry="false" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="" strict="true" targetPlayerVersion="11.4.0" useApolloConfig="false" useDebugRSLSwfs="true" useFlashSDK="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
@@ -9,7 +9,7 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="main.as"/>
+    <application path="main_1_SourceFLA.as"/>
   </applications>
   <modules/>
   <workers/>

@@ -1,4 +1,4 @@
-package com.oxylusflash.mmgallery 
+﻿package com.oxylusflash.mmgallery 
 {
 	//{ region IMPORT CLASSES
 	import flash.events.Event;

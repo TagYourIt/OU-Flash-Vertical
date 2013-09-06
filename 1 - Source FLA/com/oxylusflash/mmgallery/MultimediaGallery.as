@@ -1327,7 +1327,7 @@
 								
 								if (stage.displayState == StageDisplayState.FULL_SCREEN) 
 								{
-									stage.displayState = StageDisplayState.NORMAL;
+									//stage.displayState = StageDisplayState.NORMAL;
 									ytOld_Gallery.signalHandler("NORMAL");
 								}
 								

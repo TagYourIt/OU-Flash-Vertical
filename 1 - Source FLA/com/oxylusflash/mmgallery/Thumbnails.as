@@ -1,4 +1,4 @@
-package com.oxylusflash.mmgallery 
+﻿package com.oxylusflash.mmgallery 
 {
 	//{ region IMPORT CLASSES
 	import flash.display.Loader;
@@ -314,7 +314,7 @@ package com.oxylusflash.mmgallery
 		}
 		//} endregion
 		
-		//{ region TOGGLE SIGN
+		//{ region TOGGLE SIGN - iCONs
 		internal final function ToggleSign(pToggle : Boolean = true):void 
 		{
 			if (pToggle) 
@@ -331,7 +331,7 @@ package com.oxylusflash.mmgallery
 		}
 		//} endregion
 		
-		//{ region ANIMATE ME
+		//{ region ANIMATE ME - Animate back in - Leon
 		internal final function AnimateMe(pHide : Boolean = true, pW : Number = 0, pH : Number = 0, pTime : Number = 0, pAnimation : String = ""):void 
 		{
 			if (!pHide) 
@@ -396,10 +396,13 @@ package com.oxylusflash.mmgallery
 			});
 		}
 		//} endregion
+
+		
 		
 		//{ region SET ME ON POS
 		private final function SetMeOnPos(pW : Number = 0, pH : Number = 0):void
 		{
+			
 			super.x = int(Math.max(0, Math.min(pW, initX)));
 			super.y = int(Math.max(0, Math.min(pH, initY)));
 		}

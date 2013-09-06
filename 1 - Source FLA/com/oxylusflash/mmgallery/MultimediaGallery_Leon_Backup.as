@@ -930,7 +930,7 @@
 			var thisHeight = e.target.height;
 			e.target.y = e.target.y - tu.randomYSpeed;
 			if(e.target.y < (0 - thisHeight)){
-				e.target.y = 1000;
+				e.target.y = bg_mc.height;
 			}
 		}
 		//end

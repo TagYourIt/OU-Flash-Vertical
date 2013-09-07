@@ -90,6 +90,10 @@
 		private final function clickHandler(e:MouseEvent):void 
 		{
 			_btnSignal.dispatch("EMAIL ME");
+			trace("Email button Clicked");
+			
+				
+			
 		}
 		//} endregion
 		

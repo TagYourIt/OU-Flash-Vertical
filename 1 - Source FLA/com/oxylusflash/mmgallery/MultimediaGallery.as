@@ -33,6 +33,10 @@
 	import flash.net.URLRequest;
 	
 	import caurina.transitions.Tweener;
+	
+	import com.greensock.TweenMax;
+	
+	
 	//import com.oxylusflash.multimediaviewer.EmailBtnOU;
 
 	//} endregion
@@ -930,11 +934,21 @@
 		//Move thumbnails up
 		private function SlideThumbUp(e:Event):void
 		{
+			//Leon - Rand number for x pos
 			var high =  _compLayout.width - 100;
 			var	low = 1;
-			//trace ("high " + high);
-			//trace ("low " + low);
+
 			var myRandomNumber:int = Math.floor(Math.random()*(1+high-low))+low;
+			
+			//Leon - Rand number for x pos
+			var highY =  _compLayout.height + 400;
+			var	lowY = 1;
+			
+			//trace(highY);
+
+			var myRandomNumberY:int = Math.floor(Math.random()*(1+highY-lowY))+lowY;
+			
+				//trace (myRandomNumberY);
 			
 			//trace("myRandomNumber: " + myRandomNumber);
 			/*Tu*/
@@ -943,8 +957,14 @@
 			//trace(tu.randomYSpeed);
 			var thisHeight = e.target.height;
 			e.target.y = e.target.y - tu.randomYSpeed;
+			//trace("thisHeight"+thisHeight);
+			//TweenMax.allTo(tu, 0.5, {y:"-100", alpha:0.6}, 0.1);
+			
+			
+			
 			if(e.target.y < (0 - thisHeight)){
 				e.target.y = 1300; //height
+				//trace(e.target.y);
 				e.target.x = myRandomNumber;
 			}
 		}
@@ -984,7 +1004,7 @@
 		//{ region DO ROTATE ANIMATION
 		private final function DoRotateAnimation(pThumbnail : Thumbnails):void
 		{
-			trace("helloz");
+			//trace("helloz");
 			
 			if (old_thumbnail && old_thumbnail != pThumbnail) 
 			{

@@ -14,8 +14,8 @@
 	import com.oxylusflash.multimediaviewer.LclVidGallery;
 	import com.oxylusflash.multimediaviewer.SwfGallery;
 	import com.oxylusflash.multimediaviewer.YtGallery;
-	import com.oxylusflash.multimediaviewer.CloseBtnOU;
-	import com.oxylusflash.multimediaviewer.EmailBtnOu;
+
+	import com.oxylusflash.multimediaviewer.EmailBtnOU;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -33,6 +33,12 @@
 	import flash.net.URLRequest;
 	
 	import caurina.transitions.Tweener;
+	
+	import com.greensock.TweenMax;
+	
+	
+	//import com.oxylusflash.multimediaviewer.EmailBtnOU;
+
 	//} endregion
 	/**
 	 * ...
@@ -70,6 +76,8 @@
 		private var thumbSlideSpeed :int = 1.5;
 		private var countInterval : uint = 0;
 		public var closeBtnOU : CloseBtnOU;
+		public var emailBtnOU : EmailBtnOU;
+		public var videoState : String = "PLAY";
 		
 		//XML SETTINGS
 		private var _layout_settings : Object;
@@ -269,7 +277,7 @@
 			}
 			/*TU*/
 			//trace("resize width " + bg_mc.width);
-			//trace("resize height " + bg_mc.height);
+			trace("resize height " + bg_mc.height);
 			
 		}
 		//} endregion
@@ -432,6 +440,17 @@
 					/*Tu*/
 					ResumeSlideUp();
 				break;
+				case "EMAIL ME":
+					
+					/*Tu*/			
+					ytGallery.signalHandler("PAUSE");			
+							
+					break;
+				
+				case "CLOSE KEYBOARD":
+					/*Tu*/	
+					ytGallery.signalHandler("PLAY");
+					break;
 				//} endregion
 				
 				/*
@@ -633,13 +652,17 @@
 			
 			//TU CLOSE BUTTON
 			closeBtnOU = new CloseBtnOU();
+			emailBtnOU = new EmailBtnOU();
 			
 			
 			
 			closeBtnOU.mouseEnabled = true;
 			closeBtnOU.btnSignal.add(SignalHandler);
+			emailBtnOU.mouseEnabled = true;
+			emailBtnOU.btnSignal.add(SignalHandler);
 			
 			this.addChild(closeBtnOU);
+			this.addChild(emailBtnOU);
 			
 			
 		}
@@ -805,9 +828,9 @@
 					//thumbnail.scaleY = 1.5;
 					//trace("tu " + thumbnail.scaleX);
 					
+					
 					/*Tu*/
 					thumbnail.randomYSpeed = thumbSlideSpeed;
-					
 					h_mc.addChild(thumbnail);
 					/*Tu*/
 					//thumbnail.addEventListener(Event.ENTER_FRAME,SlideThumbUp);
@@ -816,10 +839,9 @@
 				i++;
 				/*Tu*/
 				//counter for thumb generate
-				//trace(i);
-				//trace("endXML " + endXML);
-				//trace("h_mc children " + h_mc.numChildren);
-				
+				trace(i);
+				trace("endXML " + endXML);
+				trace("h_mc children " + h_mc.numChildren);
 				if(i == endXML){
 					trace("done");
 					//Execute function for SlideUp Governor
@@ -924,21 +946,37 @@
 		//Move thumbnails up
 		private function SlideThumbUp(e:Event):void
 		{
-			var high =  _compLayout.width;
+			//Leon - Rand number for x pos
+			var high =  _compLayout.width - 100;
 			var	low = 1;
-			//trace ("high " + high);
-			//trace ("low " + low);
+
 			var myRandomNumber:int = Math.floor(Math.random()*(1+high-low))+low;
 			
-			trace("myRandomNumber: " + myRandomNumber);
+			//Leon - Rand number for x pos
+			var highY =  _compLayout.height + 400;
+			var	lowY = 1;
+			
+			//trace(highY);
+
+			var myRandomNumberY:int = Math.floor(Math.random()*(1+highY-lowY))+lowY;
+			
+				//trace (myRandomNumberY);
+			
+			//trace("myRandomNumber: " + myRandomNumber);
 			/*Tu*/
 			//trace(e.target.y);
 			var tu = e.target as Thumbnails;
 			//trace(tu.randomYSpeed);
 			var thisHeight = e.target.height;
 			e.target.y = e.target.y - tu.randomYSpeed;
+			//trace("thisHeight"+thisHeight);
+			//TweenMax.allTo(tu, 0.5, {y:"-100", alpha:0.6}, 0.1);
+			
+			
+			
 			if(e.target.y < (0 - thisHeight)){
 				e.target.y = 1300; //height
+				//trace(e.target.y);
 				e.target.x = myRandomNumber;
 			}
 		}
@@ -957,7 +995,9 @@
 		private function SlideAnother():void{
 			h_mc.getChildAt(countInterval).addEventListener(Event.ENTER_FRAME, SlideThumbUp);
 			countInterval++;
+			//trace("countInterval" +countInterval);
 		}
+		
 		
 		private function SlideUpGovernor():void{
 			//function to slide the thumbs up version 2
@@ -966,22 +1006,6 @@
 			//clearInterval();
 			//var myInterval:uint = setInterval (SlideAnother, 1000);
 			//clearInterval(myInterval);
-			
-			/* Leon */
-			
-			
-			var high =  thumbnail.initX - 90;
-			var	low = thumbnail.initY + 30;
-			
-			var myRandomNumber:int = Math.floor(Math.random()*(1+high-low))+low;
-			
-			 //randomNumberText.text = (Math.ceil(Math.random()*(high-low))+low).toString();
-			
-			//trace(randomNumberText);
-			
-			trace("myRandomNumber" + myRandomNumber);
-			
-			
 			
 			for(var i = 0;i < endXML; i++){
 				h_mc.getChildAt(i).addEventListener(Event.ENTER_FRAME, SlideThumbUp);
@@ -992,7 +1016,7 @@
 		//{ region DO ROTATE ANIMATION
 		private final function DoRotateAnimation(pThumbnail : Thumbnails):void
 		{
-			trace("region DO ROTATE ANIMATION");
+			//trace("helloz");
 			
 			if (old_thumbnail && old_thumbnail != pThumbnail) 
 			{
@@ -1012,7 +1036,7 @@
 				new Rectangle(0, 0, int(cmpW - 2 * _detailView_settings.margin), int(cmpH - 2 * _detailView_settings.margin)),
 				ResizeType.FIT);
 				
-				trace(thumbnailResize.width);//808
+				trace("thumbnailResize"+thumbnailResize.width);//808
 				
 				
 				Tweener.addTween(pThumbnail, 
@@ -1063,6 +1087,8 @@
 										ytGallery.detailView.closeBtn = _detailView_settings.closeBtn;
 										ytGallery.detailView.playBtn = _detailView_settings.playBtn;
 										
+										
+										
 										ytGallery.detailView.settings = 
 										{ 
 											label : _detailView_settings.video.titlePrefix, 
@@ -1086,6 +1112,7 @@
 										ytGallery.btn_mc.btnSignal.add(SignalHandler);
 										/*Tu - adding signal to the close button for OU video*/
 										//ytGallery.closeBtnOU.btnSignal.add(SignalHandler);
+										
 										ytGallery.mcFullscreen.fullScreenSignal.add(FullScreenSignalHandler);
 										
 										if (_detailView_settings.useUpperCase) 
@@ -1113,6 +1140,10 @@
 										closeBtnOU.visible = true;
 										closeBtnOU.alpha = 1;
 										
+										//EMAIL BUTTON POSITION
+										emailBtnOU.visible = true;
+										emailBtnOU.alpha = 1;
+										
 										//trace("position of yt " + ytGallery.x + " " + ytGallery.y);
 										//trace(pThumbnail.x + " " + pThumbnail.y);
 										var realX = pThumbnail.x + ytGallery.x;
@@ -1120,6 +1151,9 @@
 										//trace("actually pos " + realX + " " + realY);
 										closeBtnOU.x = realX + thumbnailResize.width - (closeBtnOU.width + 4);//4 is the border width
 										closeBtnOU.y = realY - (30);//4 is the border width
+										
+										emailBtnOU.x = realX + thumbnailResize.width - (emailBtnOU.width + 104);
+										emailBtnOU.y = realY - (30);
 										
 									break;
 									//} endregion
@@ -1354,7 +1388,7 @@
 								if (stage.displayState == StageDisplayState.FULL_SCREEN) 
 								{
 									//stage.displayState = StageDisplayState.NORMAL;
-									ytOld_Gallery.signalHandler("NORMAL");
+									//ytOld_Gallery.signalHandler("NORMAL");
 								}
 								
 								ytOld_Gallery.btn_mc.btnSignal.remove(SignalHandler);
@@ -1366,6 +1400,11 @@
 								closeBtnOU.visible = false;
 								
 								closeBtnOU.alpha = 0;
+								
+								
+								emailBtnOU.visible = false;
+								
+								emailBtnOU.alpha = 0;
 							}
 						break;
 						//} endregion
@@ -1387,7 +1426,7 @@
 								if (stage.displayState == StageDisplayState.FULL_SCREEN) 
 								{
 									//stage.displayState = StageDisplayState.NORMAL;
-									lvOld_Gallery.signalHandler("NORMAL");
+									//lvOld_Gallery.signalHandler("NORMAL");
 								}
 								
 								lvOld_Gallery.btn_mc.btnSignal.remove(SignalHandler);

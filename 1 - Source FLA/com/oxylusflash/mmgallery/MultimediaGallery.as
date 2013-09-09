@@ -1,6 +1,7 @@
 ﻿package com.oxylusflash.mmgallery 
 {
 	//{ region IMPORT CLASSES
+	import com.greensock.TweenMax;
 	import com.oxylusflash.framework.events.LayoutEvent;
 	import com.oxylusflash.framework.layout.Layout;
 	import com.oxylusflash.framework.resize.Resize;
@@ -10,12 +11,12 @@
 	import com.oxylusflash.mmgallery.Thumbnails;
 	import com.oxylusflash.multimediaviewer.AudioGallery;
 	import com.oxylusflash.multimediaviewer.CloseBtnOU;
+	import com.oxylusflash.multimediaviewer.EmailBtnOU;
 	import com.oxylusflash.multimediaviewer.ImgGallery;
 	import com.oxylusflash.multimediaviewer.LclVidGallery;
 	import com.oxylusflash.multimediaviewer.SwfGallery;
 	import com.oxylusflash.multimediaviewer.YtGallery;
-
-	import com.oxylusflash.multimediaviewer.EmailBtnOU;
+	import com.oxylusflash.multimediaviewer.mcVideoTitle;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -31,10 +32,10 @@
 	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.text.TextFieldAutoSize;
+	import flash.text.TextField;
 	
 	import caurina.transitions.Tweener;
-	
-	import com.greensock.TweenMax;
 	
 	
 	//import com.oxylusflash.multimediaviewer.EmailBtnOU;
@@ -77,7 +78,7 @@
 		private var countInterval : uint = 0;
 		public var closeBtnOU : CloseBtnOU;
 		public var emailBtnOU : EmailBtnOU;
-		public var videoState : String = "PLAY";
+		public var _mcVideoTitle : mcVideoTitle;
 		
 		//XML SETTINGS
 		private var _layout_settings : Object;
@@ -154,8 +155,12 @@
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;
 			loadXML(stage.loaderInfo.parameters.xmlFile || xmlFile);
+			
 		}
 		//} endregion
+		
+		
+		
 		
 		//{ region DATA URL LOADER INPUT OUTPUT ERROR HANDLER
 		private final function dataUrlLoader_IoErrorHandler(e:IOErrorEvent):void 
@@ -388,7 +393,7 @@
 						StopSlideThumbUp(pThumbnail);
 						//itunes U
 						trace("itunes link is " + pThumbnail.ituneLink);
-						
+						newVideoText(pThumbnail.title);
 					}
 				break;
 				//} endregion
@@ -439,18 +444,8 @@
 					fullScreenPressed = false;
 					/*Tu*/
 					ResumeSlideUp();
+					_mcVideoTitle.alpha = 0;
 				break;
-				case "EMAIL ME":
-					
-					/*Tu*/			
-					ytGallery.signalHandler("PAUSE");			
-							
-					break;
-				
-				case "CLOSE KEYBOARD":
-					/*Tu*/	
-					ytGallery.signalHandler("PLAY");
-					break;
 				//} endregion
 				
 				/*
@@ -664,6 +659,10 @@
 			this.addChild(closeBtnOU);
 			this.addChild(emailBtnOU);
 			
+			_mcVideoTitle = new mcVideoTitle();
+			_mcVideoTitle.alpha = 0;
+			this.addChild(_mcVideoTitle);
+			
 			
 		}
 		//} endregion
@@ -846,11 +845,20 @@
 					trace("done");
 					//Execute function for SlideUp Governor
 					SlideUpGovernor();
+					//Video Text
+					
 				}
 			}
 			
 		}
 		//} endregion
+		
+		
+		
+		public function newVideoText(videoTitle:String):void{
+			_mcVideoTitle.txt.text = videoTitle;
+		}
+		
 		/*Tu*/
 		private function generateRandomThumbSize():Rectangle
 		{
@@ -1087,8 +1095,6 @@
 										ytGallery.detailView.closeBtn = _detailView_settings.closeBtn;
 										ytGallery.detailView.playBtn = _detailView_settings.playBtn;
 										
-										
-										
 										ytGallery.detailView.settings = 
 										{ 
 											label : _detailView_settings.video.titlePrefix, 
@@ -1112,7 +1118,6 @@
 										ytGallery.btn_mc.btnSignal.add(SignalHandler);
 										/*Tu - adding signal to the close button for OU video*/
 										//ytGallery.closeBtnOU.btnSignal.add(SignalHandler);
-										
 										ytGallery.mcFullscreen.fullScreenSignal.add(FullScreenSignalHandler);
 										
 										if (_detailView_settings.useUpperCase) 
@@ -1154,6 +1159,13 @@
 										
 										emailBtnOU.x = realX + thumbnailResize.width - (emailBtnOU.width + 104);
 										emailBtnOU.y = realY - (30);
+										
+										//Video Title Position
+										_mcVideoTitle.x = realX;
+										_mcVideoTitle.y = realY - 25;
+										_mcVideoTitle.alpha = 1;
+										
+										
 										
 									break;
 									//} endregion

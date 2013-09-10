@@ -37,6 +37,8 @@
 	import com.greensock.TweenMax;
 	
 	
+	
+	
 	//import com.oxylusflash.multimediaviewer.EmailBtnOU;
 
 	//} endregion
@@ -305,6 +307,9 @@
 		}
 		//} endregion
 		
+		
+	
+		
 		//{ region THUMB SIGNAL HANDLER
 		private final function SignalHandler(pEventType : String = "", pThumbnail: Thumbnails = null):void
 		{
@@ -432,13 +437,24 @@
 				break;
 				//} endregion
 				
-				//{ region CLOSE BTN
+				//{ region CLOSE BTN - Leon too
 				case "CLOSE ME":
 					RollBackAnim(old_thumbnail);
 					fullScreenPressed = false;
 					/*Tu*/
 					ResumeSlideUp();
 				break;
+				var videoState;	
+				case "EMAIL ME":
+					ytGallery.signalHandler("PAUSE");
+					videoState = "PAUSE";
+				break;
+				
+				case "KEYBOARD CLOSE":
+					ytGallery.signalHandler("PLAY");
+					videoState = "PLAY";
+				break;
+				
 				//} endregion
 				
 				/*

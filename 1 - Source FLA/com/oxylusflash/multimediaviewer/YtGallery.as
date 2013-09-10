@@ -1,4 +1,4 @@
-package com.oxylusflash.multimediaviewer 
+﻿package com.oxylusflash.multimediaviewer 
 {
 	//{ region IMPORT CLASSES
 	import flash.events.MouseEvent;
@@ -318,7 +318,7 @@ package com.oxylusflash.multimediaviewer
 			videoPlayer = new YouTubePlayer();
 			mcVh.addChild(videoPlayer);
 			/*Tu*/
-			//videoPlayer.x = -200;
+			//videoPlayer.x = -200; //comtainer
 			
 			//videoPlayer.x = -20;
 			videoPlayer.videoSignal.add(VideoPlayerHandler);

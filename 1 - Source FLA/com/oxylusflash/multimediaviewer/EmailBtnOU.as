@@ -6,9 +6,19 @@
 	import flash.events.MouseEvent;
 	import flash.text.TextFieldAutoSize;
 	
+import fl.display.ProLoader;
+import flash.events.Event;
+import flash.text.TextField;	
+	import flash.net.URLRequest;
+	
 	import caurina.transitions.Tweener;
 	
 	import org.osflash.signals.Signal;
+	import com.oxylusflash.multimediaviewer.TogglePlayPause;
+	
+	
+	
+	
 	//} endregion
 	/**
 	 * ...
@@ -16,6 +26,11 @@
 	 */
 	public class EmailBtnOU extends Sprite
 	{
+		
+		private var _playPauseSignal : Signal;
+		
+		
+		
 		//{ region FIELDS
 		//public var lbl_mc : MovieClip;
 		//public var sign_mc : MovieClip;
@@ -87,14 +102,44 @@
 		//} endregion
 		
 		//{ region CLICK HANDLER
+		
+		var fl_ProLoader_2:ProLoader;
+
+		//This variable keeps track of whether you want to load or unload the SWF
+		var fl_ToLoad_2:Boolean = true;		
+		
 		private final function clickHandler(e:MouseEvent):void 
 		{
-			_btnSignal.dispatch("EMAIL ME");
-			trace("Email button Clicked");
+			_btnSignal.dispatch("EMAIL ME"); //goes to MultimediaGallery.as to pause video
 			
-				
-			
+			fl_ProLoader_2 = new ProLoader();
+			fl_ProLoader_2.load(new URLRequest("keyboard.swf"));
+			stage.addChild(fl_ProLoader_2);
+	
+			fl_ProLoader_2.contentLoaderInfo.addEventListener(Event.COMPLETE, loadHandler);
+
 		}
+		
+		function loadHandler(event:Event):void
+			{
+				fl_ProLoader_2.content.addEventListener('killMe', killLoadedClip); 
+				var child:MovieClip = MovieClip(event.target.content);
+			
+				var textBuddy:TextField = child.txtBuddy;
+				textBuddy.text = "itunesURL";
+			}
+		
+		//Listener to remove the keyboard
+		function killLoadedClip(event:Event):void
+		{ 
+			event.target.removeEventListener('killMe', killLoadedClip) 
+			stage.removeChild(fl_ProLoader_2); 
+			fl_ProLoader_2.unload(); 
+			
+			//resume video
+		}
+		
+		
 		//} endregion
 		
 		//} endregion

@@ -6,9 +6,9 @@
 	import flash.events.MouseEvent;
 	import flash.text.TextFieldAutoSize;
 	
-import fl.display.ProLoader;
-import flash.events.Event;
-import flash.text.TextField;	
+	import fl.display.ProLoader;
+	import flash.events.Event;
+	import flash.text.TextField;	
 	import flash.net.URLRequest;
 	
 	import caurina.transitions.Tweener;
@@ -28,7 +28,7 @@ import flash.text.TextField;
 	{
 		
 		private var _playPauseSignal : Signal;
-		
+		public var _iTunesLink : String;
 		
 		
 		//{ region FIELDS
@@ -115,28 +115,33 @@ import flash.text.TextField;
 			fl_ProLoader_2 = new ProLoader();
 			fl_ProLoader_2.load(new URLRequest("keyboard.swf"));
 			stage.addChild(fl_ProLoader_2);
-	
+			
+			trace(_iTunesLink);			
+			
 			fl_ProLoader_2.contentLoaderInfo.addEventListener(Event.COMPLETE, loadHandler);
-
 		}
+		
+		var pThumbnail;
 		
 		function loadHandler(event:Event):void
 			{
+				//_btnSignal.dispatch("EMAIL ME");
 				fl_ProLoader_2.content.addEventListener('killMe', killLoadedClip); 
 				var child:MovieClip = MovieClip(event.target.content);
-			
+				
 				var textBuddy:TextField = child.txtBuddy;
-				textBuddy.text = "itunesURL";
+				textBuddy.text = _iTunesLink;
 			}
 		
 		//Listener to remove the keyboard
 		function killLoadedClip(event:Event):void
 		{ 
+			_btnSignal.dispatch("KEYBOARD CLOSE"); //resume video
+			
 			event.target.removeEventListener('killMe', killLoadedClip) 
 			stage.removeChild(fl_ProLoader_2); 
 			fl_ProLoader_2.unload(); 
-			
-			//resume video
+
 		}
 		
 		

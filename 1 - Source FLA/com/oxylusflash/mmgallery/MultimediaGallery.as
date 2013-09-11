@@ -394,6 +394,7 @@
 						//itunes U
 						trace("itunes link is " + pThumbnail.ituneLink);
 						newVideoText(pThumbnail.title);
+						trace("Title from CMS: " + pThumbnail.title);
 					}
 				break;
 				//} endregion
@@ -451,6 +452,8 @@
 				case "EMAIL ME":
 					ytGallery.signalHandler("PAUSE");
 					videoState = "PAUSE";
+					
+					//trace("Email Me pressed!" + pThumbnail.ituneLink);
 				break;
 				
 				case "KEYBOARD CLOSE":
@@ -1161,6 +1164,8 @@
 										//EMAIL BUTTON POSITION
 										emailBtnOU.visible = true;
 										emailBtnOU.alpha = 1;
+										
+										emailBtnOU._iTunesLink = pThumbnail.ituneLink;
 										
 										//trace("position of yt " + ytGallery.x + " " + ytGallery.y);
 										//trace(pThumbnail.x + " " + pThumbnail.y);

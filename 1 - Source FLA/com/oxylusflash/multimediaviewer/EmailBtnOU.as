@@ -116,7 +116,7 @@
 			fl_ProLoader_2.load(new URLRequest("keyboard.swf"));
 			stage.addChild(fl_ProLoader_2);
 			
-			trace(_iTunesLink);			
+			//trace(_iTunesLink);			
 			
 			fl_ProLoader_2.contentLoaderInfo.addEventListener(Event.COMPLETE, loadHandler);
 		}
@@ -125,7 +125,7 @@
 		
 		function loadHandler(event:Event):void
 			{
-				//_btnSignal.dispatch("EMAIL ME");
+				
 				fl_ProLoader_2.content.addEventListener('killMe', killLoadedClip); 
 				var child:MovieClip = MovieClip(event.target.content);
 				

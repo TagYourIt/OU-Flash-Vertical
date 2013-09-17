@@ -5,7 +5,7 @@
     <flash>1</flash>
     <projectorWin>0</projectorWin>
     <projectorMac>0</projectorMac>
-    <html>1</html>
+    <html>0</html>
     <gif>0</gif>
     <jpeg>0</jpeg>
     <png>0</png>
@@ -19,7 +19,7 @@
     <jpegDefaultName>1</jpegDefaultName>
     <pngDefaultName>1</pngDefaultName>
     <rnwkDefaultName>1</rnwkDefaultName>
-    <swcDefaultName>1</swcDefaultName>
+    <swcDefaultName>0</swcDefaultName>
     <flashFileName>/Users/Prime/Desktop/Personal/OU-Flash-Vertical/1 - Source FLA/bin-debug/main.swf</flashFileName>
     <projectorWinFileName>main.exe</projectorWinFileName>
     <projectorMacFileName>main.app</projectorMacFileName>
@@ -28,18 +28,18 @@
     <jpegFileName>main.jpg</jpegFileName>
     <pngFileName>main.png</pngFileName>
     <rnwkFileName>main.smil</rnwkFileName>
-    <swcFileName>main.swc</swcFileName>
+    <swcFileName>../2 - Published SWF/main.swc</swcFileName>
   </PublishFormatProperties>
   <PublishHtmlProperties enabled="true">
     <VersionDetectionIfAvailable>0</VersionDetectionIfAvailable>
-    <VersionInfo>11,7,0,0;11,6,0,0;11,5,0,0;11,4,0,0;11,3,0,0;11,2,0,0;11,1,0,0;10,3,0,0;10,2,153,0;10,1,52,0;9,0,124,0;8,0,24,0;7,0,14,0;6,0,79,0;5,0,58,0;4,0,32,0;3,0,8,0;2,0,1,12;1,0,0,1;</VersionInfo>
+    <VersionInfo>11,7,0,0;11,6,0,0;11,5,0,0;11,4,0,0;11,3,0,0;11,2,0,0;11,1,0,0;10,3,0,0;10,2,153,0;10,1,52,0;9,0,115,0;8,0,24,0;7,0,14,0;6,0,79,0;5,0,58,0;4,0,32,0;3,0,8,0;2,0,1,12;1,0,0,1;</VersionInfo>
     <UsingDefaultContentFilename>1</UsingDefaultContentFilename>
     <UsingDefaultAlternateFilename>1</UsingDefaultAlternateFilename>
     <ContentFilename>main_content.html</ContentFilename>
     <AlternateFilename>main_alternate.html</AlternateFilename>
     <UsingOwnAlternateFile>0</UsingOwnAlternateFile>
     <OwnAlternateFilename></OwnAlternateFilename>
-    <Width>800</Width>
+    <Width>720</Width>
     <Height>1280</Height>
     <Align>0</Align>
     <Units>0</Units>
@@ -53,7 +53,7 @@
     <WindowMode>0</WindowMode>
     <DisplayMenu>1</DisplayMenu>
     <DeviceFont>0</DeviceFont>
-    <TemplateFileName>/Users/Prime/Library/Application Support/Adobe/Flash CC/en_US/Configuration/HTML/Default.html</TemplateFileName>
+    <TemplateFileName>/Users/void/Library/Application Support/Adobe/Flash CC/en_US/Configuration/HTML/Default.html</TemplateFileName>
     <showTagWarnMsg>1</showTagWarnMsg>
   </PublishHtmlProperties>
   <PublishFlashProperties enabled="true">
@@ -62,7 +62,7 @@
     <Report>0</Report>
     <Protect>0</Protect>
     <OmitTraceActions>0</OmitTraceActions>
-    <Quality>80</Quality>
+    <Quality>100</Quality>
     <DeblockingFilter>0</DeblockingFilter>
     <StreamFormat>0</StreamFormat>
     <StreamCompress>7</StreamCompress>
@@ -88,7 +88,7 @@
     <DocumentClass></DocumentClass>
     <AS3Strict>2</AS3Strict>
     <AS3Coach>4</AS3Coach>
-    <AS3AutoDeclare>4096</AS3AutoDeclare>
+    <AS3AutoDeclare>0</AS3AutoDeclare>
     <AS3Dialect>AS3</AS3Dialect>
     <AS3ExportFrame>1</AS3ExportFrame>
     <AS3Optimize>1</AS3Optimize>
@@ -96,7 +96,7 @@
     <ScriptStuckDelay>15</ScriptStuckDelay>
     <IncludeXMP>1</IncludeXMP>
     <HardwareAcceleration>0</HardwareAcceleration>
-    <AS3Flags>4102</AS3Flags>
+    <AS3Flags>6</AS3Flags>
     <DefaultLibraryLinkage>rsl</DefaultLibraryLinkage>
     <RSLPreloaderMethod>wrap</RSLPreloaderMethod>
     <RSLPreloaderSWF>$(AppConfig)/ActionScript 3.0/rsls/loader_animation.swf</RSLPreloaderSWF>
@@ -105,6 +105,10 @@
         <swc-path>$(AppConfig)/ActionScript 3.0/libs</swc-path>
         <linkage>merge</linkage>
       </library-path-entry>
+      <library-path-entry>
+        <swc-path>.</swc-path>
+        <linkage>external</linkage>
+      </library-path-entry>
     </LibraryPath>
     <LibraryVersions>
     </LibraryVersions>
@@ -112,7 +116,7 @@
     <TelemetryPassword></TelemetryPassword>
   </PublishFlashProperties>
   <PublishJpegProperties enabled="true">
-    <Width>800</Width>
+    <Width>720</Width>
     <Height>1280</Height>
     <Progressive>0</Progressive>
     <DPI>4718592</DPI>
@@ -138,12 +142,12 @@
     <exportSMIL>1</exportSMIL>
   </PublishRNWKProperties>
   <PublishGifProperties enabled="true">
-    <Width>800</Width>
+    <Width>720</Width>
     <Height>1280</Height>
     <Animated>0</Animated>
     <MatchMovieDim>1</MatchMovieDim>
     <Loop>1</Loop>
-    <LoopCount></LoopCount>
+    <LoopCount>0</LoopCount>
     <Smooth>1</Smooth>
     <MaxColors>255</MaxColors>
   </PublishGifProperties>

@@ -1,13 +1,18 @@
-package com.oxylusflash.multimediaviewer 
+﻿package com.oxylusflash.multimediaviewer 
 {
 	//{ region IMPORT CLASSES
+	import com.oxylusflash.framework.util.StringUtil;
+	import com.oxylusflash.mmgallery.MultimediaGallery;
+	import com.oxylusflash.mmgallery.Thumbnails;
+	
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
+	import flash.utils.setTimeout;
 	
 	import caurina.transitions.Tweener;
 	
-	import com.oxylusflash.framework.util.StringUtil;
-	import com.oxylusflash.mmgallery.Thumbnails;
+	import org.osflash.signals.Signal;
+	
 	//} endregion
 	/**
 	 * ...
@@ -21,6 +26,8 @@ package com.oxylusflash.multimediaviewer
 		private var objResize : Rectangle = new Rectangle();
 		private var isDragging : Boolean = false;
 		private var old_parent : Thumbnails;
+		private var _btnSignal : Signal;
+		private var videoCloseDelay : uint = 2000;
 		//} endregion
 		
 		//{ region CONSTRUCTOR
@@ -28,6 +35,8 @@ package com.oxylusflash.multimediaviewer
 		{
 			//..
 			super();
+			//Tu
+			_btnSignal = new Signal(String);
 		}
 		//} endregion
 		
@@ -125,7 +134,12 @@ package com.oxylusflash.multimediaviewer
 					if (!isDragging) 
 					{
 						resizeTimeLeft = true;
-						//trace("[INFO]: Playback complete.");
+						trace("[INFO]: Playback complete.");
+						//Tu
+						setTimeout(function():void{
+							_btnSignal.dispatch("CLOSE ME");
+						}, videoCloseDelay);
+						
 					}
 				break;
 				
@@ -318,7 +332,7 @@ package com.oxylusflash.multimediaviewer
 			videoPlayer = new YouTubePlayer();
 			mcVh.addChild(videoPlayer);
 			/*Tu*/
-			//videoPlayer.x = -200;
+			//videoPlayer.x = -200; //comtainer
 			
 			//videoPlayer.x = -20;
 			videoPlayer.videoSignal.add(VideoPlayerHandler);
@@ -333,7 +347,12 @@ package com.oxylusflash.multimediaviewer
 			videoPlayer.StartMe(ytSettings, pPolicy);
 		}
 		//} endregion
-		
+		//Tu
+		public function get btnSignal():Signal { return _btnSignal; }
+		public function set btnSignal(value:Signal):void 
+		{
+			_btnSignal = value;
+		}
 		//{ region DESTROY ME
 		override internal function DestroyMe():void
 		{

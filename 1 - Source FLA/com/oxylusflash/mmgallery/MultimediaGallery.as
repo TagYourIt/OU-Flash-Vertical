@@ -219,7 +219,7 @@
 			
 			xmlLength = _dataXML.content.item.length();
 			/*Tu get total items*/
-			trace("length is "  + xmlLength );
+			//trace("length is "  + xmlLength );
 			
 			try 
 			{
@@ -262,7 +262,7 @@
 					DoThumbnailResize(old_thumbnail);
 				}
 				
-				if (thumbPag && !thumbPag.visible && thumbPagElse) 
+				if (thumbPag && !thumbPag.visible && thumbPagElse)
 				{
 					thumbPagElse = false;
 					thumbPag.visible = true;
@@ -282,7 +282,7 @@
 			}
 			/*TU*/
 			//trace("resize width " + bg_mc.width);
-			trace("resize height " + bg_mc.height);
+			//trace("resize height " + bg_mc.height);
 			
 		}
 		//} endregion
@@ -388,12 +388,17 @@
 						
 						DoRotateAnimation(pThumbnail);
 						
+						
+					
+						
 						/*Tu*/
 						//Stop thumb from sliding up
 						StopSlideThumbUp(pThumbnail);
+						
 						//itunes U
 						trace("itunes link is " + pThumbnail.ituneLink);
 						newVideoText(pThumbnail.title);
+						trace("Title from CMS: " + pThumbnail.title);
 					}
 				break;
 				//} endregion
@@ -444,8 +449,24 @@
 					fullScreenPressed = false;
 					/*Tu*/
 					ResumeSlideUp();
+				
 					_mcVideoTitle.alpha = 0;
 				break;
+				
+				var videoState;	
+				case "EMAIL ME":
+					ytGallery.signalHandler("PAUSE");
+					videoState = "PAUSE";
+					
+					//trace("Email Me pressed!" + pThumbnail.ituneLink);
+				break;
+				
+				case "KEYBOARD CLOSE":
+					ytGallery.signalHandler("PLAY");
+					videoState = "PLAY";
+				break;
+				
+				
 				//} endregion
 				
 				/*
@@ -646,22 +667,25 @@
 			this.y = int(_compLayout.y);
 			
 			//TU CLOSE BUTTON
-			closeBtnOU = new CloseBtnOU();
-			emailBtnOU = new EmailBtnOU();
-			
-			
-			
-			closeBtnOU.mouseEnabled = true;
-			closeBtnOU.btnSignal.add(SignalHandler);
-			emailBtnOU.mouseEnabled = true;
-			emailBtnOU.btnSignal.add(SignalHandler);
-			
-			this.addChild(closeBtnOU);
-			this.addChild(emailBtnOU);
 			
 			_mcVideoTitle = new mcVideoTitle();
 			_mcVideoTitle.alpha = 0;
+			
+			
+			closeBtnOU = new CloseBtnOU();
+			emailBtnOU = new EmailBtnOU();
+			
+			closeBtnOU.mouseEnabled = true;
+			closeBtnOU.btnSignal.add(SignalHandler);
+			
+			emailBtnOU.mouseEnabled = true;
+			emailBtnOU.btnSignal.add(SignalHandler);
+			
 			this.addChild(_mcVideoTitle);
+			this.addChild(closeBtnOU);
+			this.addChild(emailBtnOU);
+			
+			
 			
 			
 		}
@@ -758,7 +782,7 @@
 			//var posRect : Rectangle = new Rectangle(0, 0, _thumbCell_settings.width, _thumbCell_settings.height);
 			/*Tu*/
 			var posRect : Rectangle = new Rectangle(0, 0, _thumbCell_settings.width, _thumbCell_settings.height);
-			var delayTime : int = 0;
+			var delayTime : int = 500; //delay the load to fix the gap issue
 			
 			while (i < xmlEnd)
 			{
@@ -821,10 +845,10 @@
 					thumbnail.y = 
 					thumbnail.initY = int(posRect.y + Math.random() * posRect.height);
 					//trace("thumbnail width " + thumbnail.width);
-					//thumbnail.width = 132;
-					//thumbnail.height = 86;
-					//thumbnail.scaleX = 2;
-					//thumbnail.scaleY = 1.5;
+					//thumbnail.width = 532;
+					//thumbnail.height = 586;
+					//thumbnail.scaleX = 500;
+					//thumbnail.scaleY = 600;
 					//trace("tu " + thumbnail.scaleX);
 					
 					
@@ -1099,7 +1123,7 @@
 										{ 
 											label : _detailView_settings.video.titlePrefix, 
 											autoPlay : _detailView_settings.video.autoPlay,
-											repeat : _detailView_settings.video.repeat,
+											repeat : _detailView_settings.video.repeat,//set to false
 											initVolume : _detailView_settings.video.initVolume
 										};
 										/*Tu*/
@@ -1149,6 +1173,8 @@
 										emailBtnOU.visible = true;
 										emailBtnOU.alpha = 1;
 										
+										emailBtnOU._iTunesLink = pThumbnail.ituneLink;
+										
 										//trace("position of yt " + ytGallery.x + " " + ytGallery.y);
 										//trace(pThumbnail.x + " " + pThumbnail.y);
 										var realX = pThumbnail.x + ytGallery.x;
@@ -1165,6 +1191,8 @@
 										_mcVideoTitle.y = realY - 25;
 										_mcVideoTitle.alpha = 1;
 										
+										//Tu
+										ytGallery.btnSignal.add(SignalHandler);
 										
 										
 									break;

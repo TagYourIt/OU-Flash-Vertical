@@ -87,10 +87,11 @@
 			_ytSignal.dispatch(
 			{
 				picUrl : String(XMLList(ytXML.media::group.media::thumbnail)[0].@url), 
+				
 				title : String(XMLList(ytXML.media::group.media::title)), 
 				videoID : String(XMLList(ytXML.media::group.yt::videoid))
 			});
-			
+			//trace(picUrl);
 			try 
 			{
 				urlLoader.close();

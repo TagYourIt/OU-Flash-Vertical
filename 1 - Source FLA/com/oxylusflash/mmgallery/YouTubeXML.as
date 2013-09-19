@@ -91,7 +91,7 @@
 				title : String(XMLList(ytXML.media::group.media::title)), 
 				videoID : String(XMLList(ytXML.media::group.yt::videoid))
 			});
-			trace(picUrl);
+			
 			try 
 			{
 				urlLoader.close();

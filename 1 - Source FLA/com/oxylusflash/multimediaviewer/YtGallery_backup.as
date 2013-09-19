@@ -1,18 +1,13 @@
 ﻿package com.oxylusflash.multimediaviewer 
 {
 	//{ region IMPORT CLASSES
-	import com.oxylusflash.framework.util.StringUtil;
-	import com.oxylusflash.mmgallery.MultimediaGallery;
-	import com.oxylusflash.mmgallery.Thumbnails;
-	
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
-	import flash.utils.setTimeout;
 	
 	import caurina.transitions.Tweener;
 	
-	import org.osflash.signals.Signal;
-	
+	import com.oxylusflash.framework.util.StringUtil;
+	import com.oxylusflash.mmgallery.Thumbnails;
 	//} endregion
 	/**
 	 * ...
@@ -26,8 +21,6 @@
 		private var objResize : Rectangle = new Rectangle();
 		private var isDragging : Boolean = false;
 		private var old_parent : Thumbnails;
-		private var _btnSignal : Signal;
-		private var videoCloseDelay : uint = 2000;
 		//} endregion
 		
 		//{ region CONSTRUCTOR
@@ -35,8 +28,6 @@
 		{
 			//..
 			super();
-			//Tu
-			_btnSignal = new Signal(String);
 		}
 		//} endregion
 		
@@ -134,12 +125,7 @@
 					if (!isDragging) 
 					{
 						resizeTimeLeft = true;
-						trace("[INFO]: Playback complete.");
-						//Tu
-						setTimeout(function():void{
-							_btnSignal.dispatch("CLOSE ME");
-						}, videoCloseDelay);
-						
+						//trace("[INFO]: Playback complete.");
 					}
 				break;
 				
@@ -347,12 +333,7 @@
 			videoPlayer.StartMe(ytSettings, pPolicy);
 		}
 		//} endregion
-		//Tu
-		public function get btnSignal():Signal { return _btnSignal; }
-		public function set btnSignal(value:Signal):void 
-		{
-			_btnSignal = value;
-		}
+		
 		//{ region DESTROY ME
 		override internal function DestroyMe():void
 		{

@@ -1123,7 +1123,7 @@
 										{ 
 											label : _detailView_settings.video.titlePrefix, 
 											autoPlay : _detailView_settings.video.autoPlay,
-											repeat : _detailView_settings.video.repeat,//set to false
+											repeat : _detailView_settings.video.repeat,
 											initVolume : _detailView_settings.video.initVolume
 										};
 										/*Tu*/
@@ -1191,8 +1191,6 @@
 										_mcVideoTitle.y = realY - 25;
 										_mcVideoTitle.alpha = 1;
 										
-										//Tu
-										ytGallery.btnSignal.add(SignalHandler);
 										
 										
 									break;

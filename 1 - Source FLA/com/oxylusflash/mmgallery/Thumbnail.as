@@ -162,7 +162,9 @@
 			
 			urlREQ = null;
 			
-			pic_bitMapD = new BitmapData(dataLoader.content.width, dataLoader.content.height, true, 0x000000);
+			//pic_bitMapD = new BitmapData(dataLoader.content.width, dataLoader.content.height, true, 0x000000);
+			//Tu
+			pic_bitMapD = new BitmapData(800, 450, true, 0x000000);
 			pic_bitMapD.draw(dataLoader.content);
 			pic_bitMap = new Bitmap(pic_bitMapD, "auto", true);
 			
@@ -172,12 +174,15 @@
 		
 				
 				h_mc.addChild(pic_bitMap);
+				//Tu
+				h_mc.scaleX = 0.20;
+				h_mc.scaleY = 0.20;
 				
-				initW = 
-				bg_mc.width = int(h_mc.width + 2 * _settings.border.size);
 				
-				initH = 
-				bg_mc.height = int(h_mc.height + 2 * _settings.border.size);
+				//Tu
+				initW = bg_mc.width = int(h_mc.width + 2 * _settings.border.size);
+				
+				initH = bg_mc.height = int(h_mc.height + 2 * _settings.border.size);
 				
 				bg_mc.x = Math.round(bg_mc.width * 0.5 - bg_mc.width);
 				bg_mc.y = Math.round(bg_mc.height * 0.5 - bg_mc.height);
